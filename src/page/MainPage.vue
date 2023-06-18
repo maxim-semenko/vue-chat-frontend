@@ -1,14 +1,12 @@
 <template>
-  <div className="app">
-    <router-view></router-view>
-  </div>
+  <h1>Main page</h1>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: 'App',
+  name: 'MainPage',
   components: {}
 })
 </script>
