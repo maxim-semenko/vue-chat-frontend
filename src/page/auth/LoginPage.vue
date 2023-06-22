@@ -31,12 +31,16 @@
                 <v-btn
                     color="primary"
                     @click="submitForm"
+                    :disabled="isGeneratingKeys"
                 >
                   Sign in
                 </v-btn>
                 <router-link to="/register">
                   <v-btn color="primary">Registration</v-btn>
                 </router-link>
+<!--                <div v-if="isGeneratingKeys">-->
+<!--                  <v-progress-circular indeterminate></v-progress-circular>-->
+<!--                </div>-->
               </v-card-actions>
             </v-card>
           </v-col>
@@ -50,6 +54,8 @@
 import {defineComponent, reactive, ref} from "vue";
 import {minLength, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import {CryptService} from "@/service/cryptService";
+import {AuthorizationService} from "@/service/authorizationService";
 
 export default defineComponent({
   name: 'LoginPage',
@@ -69,14 +75,28 @@ export default defineComponent({
 
     const v$ = useVuelidate(formRules, formData);
 
+    let isGeneratingKeys = ref(false);
+
     const submitForm = async () => {
       console.log("Authorization")
-      const valid = await v$.value.$validate();
+      // const valid = await v$.value.$validate();
+      isGeneratingKeys.value = true;
+      await new Promise((resolve) => setTimeout(resolve, 0)); // Небольшая задержка
+
+      try {
+        const {privateKeyPem, publicKeyPem} = await AuthorizationService.generateKeyPair();
+        // Делайте что-то с privateKeyPem и publicKeyPem
+        console.log(privateKeyPem, publicKeyPem);
+      } catch (error) {
+        console.error('Ошибка при генерации ключей:', error);
+      }
+      isGeneratingKeys.value = false;
       console.log(formData)
     }
 
     return {
       step,
+      isGeneratingKeys,
       formData,
       submitForm,
       v$
