@@ -1,4 +1,4 @@
-export interface AuthDto {
+export interface AccountDto {
     username: string,
     password: string,
     firstname?: string,
