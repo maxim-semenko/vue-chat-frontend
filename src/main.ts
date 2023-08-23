@@ -1,12 +1,13 @@
 // import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router/router";
 
 
 // Vuetify
-import 'vuetify/styles'
+import 'vuetify/dist/vuetify.css'
+import '@mdi/font/css/materialdesignicons.css'
+import '../src/style.css'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'

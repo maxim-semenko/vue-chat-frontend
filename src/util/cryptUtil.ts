@@ -46,7 +46,8 @@ export class CryptUtil {
     static encryptMessageByRSA(message: string, publicKeyToEncrypt: string, privateKeyToSign: string) {
         const privateKey = forge.pki.privateKeyFromPem(privateKeyToSign);
         const publicKey = forge.pki.publicKeyFromPem(publicKeyToEncrypt)
-        const digest = (Math.random() + 1).toString(36).substring(2);
+        // const digest = (Math.random() + 1).toString(36).substring(2);
+        const digest = forge.random.getBytesSync(16);
 
         const md = forge.md.sha1.create();
         md.update(digest, 'utf8');

@@ -4,9 +4,14 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
+import { LocalStorageUtil } from "@/util/localStorageUtil";
 
 export default defineComponent({
   name: 'MainPage',
-  components: {}
+  components: {},
+  mounted() {
+    this.$router.push('/login');
+    console.log(LocalStorageUtil.getAuthorizedUserFromStorage())
+  },
 })
 </script>

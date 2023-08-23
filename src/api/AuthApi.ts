@@ -4,7 +4,7 @@ import {AccountDto} from "@/api/dto/accountDto";
 
 export class AuthApi {
 
-    static login(request: AuthDto): Promise<any> {
+    static login(request: AuthDto): Promise<AccountDto> {
         return axiosApi.post<any>('auth/login', request)
             .then(response => {
                 return response.data;
